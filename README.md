@@ -21,3 +21,12 @@ Cek status service
 Restart service
 
 `systemctl restart system_monitor`
+
+#
+Example logs files:
+
+![Alt text](img/1.png)
+
+![Alt text](img/2.png)
+
+![Alt text](img/3.png)
