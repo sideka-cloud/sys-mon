@@ -2,11 +2,14 @@
 
 Clone Repository:
 
+`git clone https://github.com/sideka-cloud/sys-mon.git && cd sys-mon`
+-
 
-How To Install: `bash install.sh`
+How to install: 
 
-How to check logs:
+`bash install.sh`
+-
+How to check logs, example:
 
-example.
 `bash read.sh "2025-03-07 22:00:00" "2025-03-07 21:10:59"`
-
+-
