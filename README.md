@@ -12,7 +12,7 @@ How to install:
 
 How to check logs, example:
 
-`bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:59"`
+`bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:00"`
 
 Cek status service
 
