@@ -3,7 +3,7 @@ Description=System Monitoring Script
 After=network.target
 
 [Service]
-ExecStart=/root/system_monitor.sh
+ExecStart=/root/sys-mon/system_monitor.sh
 Restart=always
 User=root
 Group=root
