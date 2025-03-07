@@ -13,3 +13,6 @@ systemctl daemon-reload
 # Enable service system_monitor
 systemctl enable system_monitor
 systemctl start system_monitor
+
+echo "system_monitor was installed." 
+echo " "
