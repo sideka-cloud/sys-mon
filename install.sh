@@ -14,5 +14,12 @@ systemctl daemon-reload
 systemctl enable system_monitor
 systemctl start system_monitor
 
+echo " "
 echo "system_monitor was installed." 
+echo " "
+echo "Check status service: systemctl status system_monitor"
+echo "Restart service: systemctl restart system_monitor"
+echo " "
+echo "Cehck logs files, examples"
+echo "bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:59""
 echo " "
