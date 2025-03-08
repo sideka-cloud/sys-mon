@@ -14,8 +14,7 @@ Clone Repository:
 
 #
 
-Check this line:
-replace the /sda/ part with the disk name used on the system, e.g. /vda/ or /xda/
+Check this line on file: system_monitor.sh , then replace the /sda/ part with the disk name used on the system, e.g. /vda/ or /xda/
 
 ```
     # Get Disk Read/Write (KB/s)
