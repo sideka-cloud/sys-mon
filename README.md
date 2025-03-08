@@ -2,7 +2,7 @@
 
 Pre-Requirement:
 
-Compatible for CentOS/AlmaLinux with cPanel
+- Compatible for CentOS/AlmaLinux with cPanel
 
 Make sure sysstat and iotop was installed on your system:
 
