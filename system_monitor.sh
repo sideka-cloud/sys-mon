@@ -34,7 +34,7 @@ while true; do
     # Get Network Up/Down (KB/s) using sar and sum all interfaces
     NETWORK_IO=$(sar -n DEV 1 1 | awk '/Average/ && ($2 != "lo" && $2 != "IFACE") {rx+=$5; tx+=$6} END {print tx, rx}')
 
-    # Get top 10 processes by CPU usage and include the full command
+    # Get top 15 processes by CPU usage and include the full command
     TOP_PROCESSES_CPU=$(top -c -b -n2 -w 200 -o %CPU | awk '
         BEGIN {
             # Print the header line
@@ -56,9 +56,9 @@ while true; do
                 printf "%-8s %-8s %-4s %-8s %-6s %-6s %-10s %s\n", pid, user, pr, virt, cpu, mem, time, cmd;
             }
         }
-    ' | head -n 10)  # Limit to top 10 processes
+    ' | head -n 15)  # Limit to top 15 processes
 
-    # Get top 10 processes by RAM usage and include the full command
+    # Get top 15 processes by RAM usage and include the full command
     TOP_PROCESSES_RAM=$(top -c -b -n2 -w 200 -o %MEM | awk '
         BEGIN {
             # Print the header line
@@ -80,7 +80,7 @@ while true; do
                 printf "%-8s %-8s %-4s %-8s %-6s %-6s %-10s %s\n", pid, user, pr, virt, cpu, mem, time, cmd;
             }
         }
-    ' | head -n 10)  # Limit to top 10 processes
+    ' | head -n 15)  # Limit to top 15 processes
 
     # Save full status output for Apache
     STATUS_LOG="/var/log/system_monitor/apache_status.log"
@@ -124,7 +124,11 @@ while true; do
     APACHE_LOGS=$(journalctl -u httpd --no-pager -n 10)
     MYSQL_LOGS=$(journalctl -u mysqld --no-pager -n 10)
 
+    # Get I/O status
+    TOP_PROCESSES_IO=$(iotop -b -n 5 -o -P -k | awk '!/Total DISK READ/ && !/Actual DISK READ/ && !seen[$0]++' | awk '{print substr($0, 1, 140)}')
+
     # Append the data to the output file
+    echo "=================================" >> $OUTPUT_FILE
     echo "Timestamp: $TIMESTAMP" >> $OUTPUT_FILE
     echo "CPU Usage (All Core): $CPU_USAGE%" >> $OUTPUT_FILE
     echo "Load Average (1m, 5m, 15m): $LOAD_AVERAGE" >> $OUTPUT_FILE
@@ -132,13 +136,13 @@ while true; do
     echo "Swap Usage: $SWAP_USAGE MB" >> $OUTPUT_FILE
     echo "Disk R/W: $DISK_IO KB/s" >> $OUTPUT_FILE
     echo "Network Up/Down: $NETWORK_IO KB/s" >> $OUTPUT_FILE
+    echo "=================================" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 10 Processes by CPU Usage:" >> $OUTPUT_FILE
+    echo "Top 15 Processes by CPU Usage:" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_CPU" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 10 Processes by RAM Usage:" >> $OUTPUT_FILE
+    echo "Top 15 Processes by RAM Usage:" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_RAM" >> $OUTPUT_FILE
-    echo "-------------------------------------------------------------------------------------" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
     echo "==== Apache Status ====" >> $OUTPUT_FILE
     echo "$APACHE_STATUS" >> $OUTPUT_FILE
@@ -165,11 +169,14 @@ while true; do
     echo "$APACHE_LOGS" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
     echo "$MYSQL_LOGS" >> $OUTPUT_FILE
+    echo " " >> $OUTPUT_FILE
+    echo "==== Top I/O Processes ====" >> $OUTPUT_FILE
+    echo "$TOP_PROCESSES_IO" >> $OUTPUT_FILE
     echo "-------------------------------------------------------------------------------------" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
 
     # Delete log files older than 7 days
-    find $LOG_DIR -name "sysmon_*.log" -type f -mtime +8 -exec rm -f {} \;
+    find $LOG_DIR -name "sysmon_*.log" -type f -mtime +7 -exec rm -f {} \;
 
     # Wait for the specified interval
     sleep $INTERVAL
