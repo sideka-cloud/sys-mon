@@ -128,7 +128,6 @@ while true; do
     TOP_PROCESSES_IO=$(iotop -b -n 3 -o -P -k | awk '!/Total DISK READ/ && !/Actual DISK READ/ && !seen[$0]++' | awk '{print substr($0, 1, 140)}' | head -n 20) 
 
     # Append the data to the output file
-    echo "=================================" >> $OUTPUT_FILE
     echo "Timestamp: $TIMESTAMP" >> $OUTPUT_FILE
     echo "CPU Usage (All Core): $CPU_USAGE%" >> $OUTPUT_FILE
     echo "Load Average (1m, 5m, 15m): $LOAD_AVERAGE" >> $OUTPUT_FILE
@@ -136,7 +135,7 @@ while true; do
     echo "Swap Usage: $SWAP_USAGE MB" >> $OUTPUT_FILE
     echo "Disk R/W: $DISK_IO KB/s" >> $OUTPUT_FILE
     echo "Network Up/Down: $NETWORK_IO KB/s" >> $OUTPUT_FILE
-    echo "=================================" >> $OUTPUT_FILE
+    echo "---------------------------------------" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
     echo "Top 15 Processes by CPU Usage:" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_CPU" >> $OUTPUT_FILE
