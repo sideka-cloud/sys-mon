@@ -29,7 +29,7 @@ while true; do
     SWAP_USAGE=$(free -m | awk '/Swap:/ {print $3}')
 
     # Get Disk Read/Write (KB/s)
-    DISK_IO=$(iostat -d | awk '/sda/ {print $3, $4}')
+    DISK_IO=$(iostat -d | awk '/[svx]da/ {print $3, $4}')
 
     # Get Network Up/Down (KB/s) using sar and sum all interfaces
     NETWORK_IO=$(sar -n DEV 1 1 | awk '/Average/ && ($2 != "lo" && $2 != "IFACE") {rx+=$5; tx+=$6} END {print tx, rx}')
