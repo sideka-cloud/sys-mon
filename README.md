@@ -1,26 +1,35 @@
 # System Monitor
 
+Pre-Requirement:
+
+Compatible for CentOS/AlmaLinux with cPanel
+
+Make sure sysstat and iotop was installed on your system:
+
+- `yum install sysstat iotop -y`
+
 Clone Repository:
 
-`git clone https://github.com/sideka-cloud/sys-mon.git && cd sys-mon`
+- `git clone https://github.com/sideka-cloud/sys-mon.git && cd sys-mon`
+
+#
+
+Install system_monitor: 
+
+- `bash install.sh`
 
 
-How to install: 
+Check logs system_monitor, example:
 
-`bash install.sh`
+- `bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:00"`
 
+Cek status service system_monitor
 
-How to check logs, example:
+- `systemctl status system_monitor`
 
-`bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:00"`
+Restart service system_monitor
 
-Cek status service
-
-`systemctl status system_monitor`
-
-Restart service
-
-`systemctl restart system_monitor`
+- `systemctl restart system_monitor`
 
 #
 Example logs files:
