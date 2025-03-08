@@ -14,13 +14,6 @@ Clone Repository:
 
 #
 
-Check this line on file: system_monitor.sh , then replace the /sda/ part with the disk name used on the system, e.g. /vda/ or /xda/
-
-```
-    # Get Disk Read/Write (KB/s)
-    DISK_IO=$(iostat -d | awk '/sda/ {print $3, $4}')
-```
-
 Install system_monitor: 
 
 - `bash install.sh`
