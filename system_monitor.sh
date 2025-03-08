@@ -125,7 +125,7 @@ while true; do
     MYSQL_LOGS=$(journalctl -u mysqld --no-pager -n 10)
 
     # Get I/O status
-    TOP_PROCESSES_IO=$(iotop -b -n 2 -o -P -k | awk '!/Total DISK READ/ && !/Actual DISK READ/ && !seen[$0]++' | awk '{print substr($0, 1, 140)}')
+    TOP_PROCESSES_IO=$(iotop -b -n 1 -o -P -k | awk '!/Total DISK READ/ && !/Actual DISK READ/ && !seen[$0]++' | awk '{print substr($0, 1, 140)}')
 
     # Append the data to the output file
     echo "=================================" >> $OUTPUT_FILE
