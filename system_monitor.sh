@@ -127,6 +127,9 @@ while true; do
     # Get I/O status
     TOP_PROCESSES_IO=$(iotop -b -n 3 -o -P -k | awk '!/Total DISK READ/ && !/Actual DISK READ/ && !seen[$0]++' | awk '{print substr($0, 1, 140)}' | head -n 20) 
 
+    # Get OOM status
+    OOM=$(grep "Out of memory" /var/log/messages | head -n10)
+    
     # Append the data to the output file
     echo "Timestamp: $TIMESTAMP" >> $OUTPUT_FILE
     echo "CPU Usage (All Core): $CPU_USAGE%" >> $OUTPUT_FILE
@@ -171,6 +174,9 @@ while true; do
     echo " " >> $OUTPUT_FILE
     echo "==== Top I/O Processes ====" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_IO" >> $OUTPUT_FILE
+    echo " " >> $OUTPUT_FILE
+    echo "==== Out Of Memory Logs ====" >> $OUTPUT_FILE
+    echo "$OOM" >> $OUTPUT_FILE
     echo "-------------------------------------------------------------------------------------" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
 
