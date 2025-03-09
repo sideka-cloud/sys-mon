@@ -1,4 +1,4 @@
-# System Monitor
+<h1 align="center">System Monitor</h1>
 
 ### Pre-Requirement:
 
