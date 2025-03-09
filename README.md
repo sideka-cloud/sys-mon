@@ -35,9 +35,10 @@ Restart service system_monitor
 #
 ### How to Un-install
 
-Stop service
+Stop and disable service
 
 - `systemctl stop system_monitor`
+- `systemctl disable system_monitor`
 
 Remove service and Remove logs
 
