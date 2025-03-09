@@ -1,6 +1,6 @@
 # System Monitor
 
-Pre-Requirement:
+### Pre-Requirement:
 
 - Compatible for CentOS/AlmaLinux with cPanel
 
@@ -13,6 +13,7 @@ Clone Repository:
 - `git clone https://github.com/sideka-cloud/sys-mon.git && cd sys-mon`
 
 #
+### How to Install:
 
 Install system_monitor: 
 
@@ -32,7 +33,19 @@ Restart service system_monitor
 - `systemctl restart system_monitor`
 
 #
-Example logs files:
+### How to Un-install
+
+Stop service
+
+- `systemctl stop system_monitor`
+
+Remove service and Remove logs
+
+- `rm -rf /etc/systemd/system/system_monitor.service`
+- `rm -rf /var/log/system_monitor`
+
+#
+### Example logs files:
 
 ![Alt text](img/1.png)
 
