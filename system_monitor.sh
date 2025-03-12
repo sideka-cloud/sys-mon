@@ -118,7 +118,7 @@ while true; do
     MYSQL_INNODB="$MYSQL_INNODB\nInnoDB Buffer Pool Usage: $(mysql -Nse "SHOW STATUS WHERE Variable_name IN ('Innodb_buffer_pool_pages_total', 'Innodb_buffer_pool_pages_free')" | awk '{a[$1]=$2} END {printf "%.2f%%\n", 100*(1 - a["Innodb_buffer_pool_pages_free"] / a["Innodb_buffer_pool_pages_total"]) }')"
 
     # Get MySQL query status
-    MYSQL_RUN=$(mysql -B -e "SELECT * FROM information_schema.PROCESSLIST WHERE COMMAND != 'Sleep';")
+    MYSQL_RUN=$(mysql -Nse "SELECT COUNT(*) FROM information_schema.PROCESSLIST WHERE COMMAND != 'Sleep';")
     MYSQL_SLEEP=$(mysql -Nse "SELECT COUNT(*) FROM information_schema.PROCESSLIST WHERE COMMAND = 'Sleep' AND INFO IS NULL;")
     MYSQL_QUERY=$(mysql -B -e "SELECT * FROM information_schema.PROCESSLIST WHERE COMMAND != 'Sleep';" | head -n 30)
 
