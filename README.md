@@ -8,11 +8,7 @@ Sys-mon is a simple system monitoring to check system process activity on RHEL-b
 
 ### Pre-Requirement:
 
-- Compatible for CentOS/AlmaLinux with cPanel
-
-Make sure sysstat and iotop was installed on your system:
-
-- `yum install sysstat iotop -y`
+Compatible for CentOS/AlmaLinux with cPanel
 
 Clone Repository:
 
