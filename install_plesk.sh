@@ -18,7 +18,7 @@ echo " "
 echo "=== Install system_monitor ==="
 
 # Add permission execute
-chmod +x system_monitor.sh
+chmod +x system_monitor_plesk.sh
 chmod +x read.sh
 
 # Copy file service
