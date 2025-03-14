@@ -22,14 +22,14 @@ chmod +x system_monitor.sh
 chmod +x read.sh
 
 # Copy file service
-cp -r system_monitor.service /etc/systemd/system/
+cp -r system_monitor_plesk.service /etc/systemd/system/
 
 # Reload systemd
 systemctl daemon-reload
 
 # Enable service system_monitor
-systemctl enable system_monitor
-systemctl start system_monitor
+systemctl enable system_monitor_plesk
+systemctl start system_monitor_plesk
 
 # Reconfigure apachectl
 sed -i 's/STATUSURL="http:\/\/localhost:80\/server-status"/STATUSURL="http:\/\/localhost:7080\/server-status"/g' /usr/sbin/apachectl
@@ -38,7 +38,7 @@ echo " "
 echo "=== System_monitor was installed ===" 
 echo " "
 echo "=== Check status service ==="
-echo "systemctl status system_monitor"
+echo "systemctl status system_monitor_plesk"
 echo " "
 echo "=== Check logs files, example: ==="
 echo "bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:00""
