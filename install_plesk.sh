@@ -17,6 +17,10 @@ check_package "iotop"
 echo " "
 echo "=== Install system_monitor ==="
 
+# Disable selinux
+setenforce 0
+sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
+
 # Add permission execute
 chmod +x system_monitor_plesk.sh
 chmod +x read.sh
