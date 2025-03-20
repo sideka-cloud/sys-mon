@@ -186,7 +186,7 @@ while true; do
     echo " " >> $OUTPUT_FILE
 
     # Delete log files older than 7 days
-    find $LOG_DIR -name "sysmon_*.log" -type f -mtime +7 -exec rm -f {} \;
+    find $LOG_DIR -daystart -name "sysmon_*.log" -type f -mtime +7 -exec rm -f {} \;
 
     # Wait for the specified interval
     sleep $INTERVAL
