@@ -37,6 +37,8 @@ systemctl start system_monitor_plesk
 
 # Reconfigure apachectl
 sed -i 's/STATUSURL="http:\/\/localhost:80\/server-status"/STATUSURL="http:\/\/localhost:7080\/server-status"/g' /usr/sbin/apachectl
+echo -e '\n<Location "/server-status">\n    SetHandler server-status\n    Require local\n    Require ip 127.0.0.1\n</Location>' | tee -a /etc/httpd/conf/httpd.conf
+systemctl reload httpd
 
 echo " "
 echo "=== System_monitor was installed ===" 
