@@ -132,6 +132,10 @@ while true; do
     # Get OOM status
     OOM=$(grep "Out of memory" /var/log/messages | head -n10)
     
+    # Get Total Email Queue
+    QUEUE=$(exim -bpc)
+    TOP_QUEUE=$(exim -bp | awk '/^[ ]*[0-9]+[mhd]/{id=$3} /^[ ]*<>/{next} /^[ ]*[^ ]+@[^ ]+/{senders[$1]++} END {for (s in senders) print senders[s], s}' | sort -nr | head -n5)
+
     # Append the data to the output file
     echo "Timestamp: $TIMESTAMP" >> $OUTPUT_FILE
     echo "CPU Usage (All Core): $CPU_USAGE%" >> $OUTPUT_FILE
@@ -182,6 +186,11 @@ while true; do
     echo " " >> $OUTPUT_FILE
     echo "==== Out Of Memory Logs ====" >> $OUTPUT_FILE
     echo "$OOM" >> $OUTPUT_FILE
+    echo " " >> $OUTPUT_FILE
+    echo "==== Top Email Queue ====" >> $OUTPUT_FILE
+    echo "Total Queue: $QUEUE" >> $OUTPUT_FILE
+    echo "Top Sender Queue:" >> $OUTPUT_FILE
+    echo "$TOP_QUEUE" >> $OUTPUT_FILE
     echo "-------------------------------------------------------------------------------------" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
 
