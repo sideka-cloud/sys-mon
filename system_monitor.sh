@@ -171,19 +171,19 @@ while true; do
     echo "Network Up/Down: $NETWORK_IO KB/s" >> $OUTPUT_FILE
     echo "---------------------------------------" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 15 Processes by CPU Usage:" >> $OUTPUT_FILE
+    echo "==== Top 15 Processes by CPU Usage ====" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_CPU" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 15 Processes by RAM Usage:" >> $OUTPUT_FILE
+    echo "==== Top 15 Processes by RAM Usage ====" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_RAM" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 15 Cumulative RAM Usage:" >> $OUTPUT_FILE
+    echo "==== Top 15 Cumulative RAM Usage ====" >> $OUTPUT_FILE
     echo "$TOP_RAM_1" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 10 RAM Usage by PHP:" >> $OUTPUT_FILE
+    echo "==== Top 10 RAM Usage by PHP ====" >> $OUTPUT_FILE
     echo "$TOP_RAM_2" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 10 RAM Usage by domain|user:" >> $OUTPUT_FILE
+    echo "==== Top 10 RAM Usage by domain|user ====" >> $OUTPUT_FILE
     echo "$TOP_RAM_3" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
     echo "==== Apache Status ====" >> $OUTPUT_FILE
