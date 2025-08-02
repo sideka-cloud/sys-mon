@@ -2,7 +2,7 @@
 
 ### About sys-mon:
 
-Sys-mon is a simple system monitoring to check system process activity on RHEL-based Linux using the cPanel application. This tool will check every 60 seconds regarding CPU usage, average load, RAM usage, disk, and network activity. In addition, it will also check in detail which application processes use quite high CPU and RAM, total IPs that often access the web server, total virtual hosts that are often accessed, total requests that are often accessed, total database connection usage, innodb usage, and database query activity. In addition, the last log of apache and MySQL restart activity, disk I/O usage activity, and the last out-of-memory log will be displayed. 
+Sys-mon is a simple system monitoring to check system process activity on RHEL-based Linux using the cPanel and Plesk panel application. This tool will check every 60 seconds regarding CPU usage, average load, RAM usage, disk, and network activity. In addition, it will also check in detail which application processes use quite high CPU and RAM, total IPs that often access the web server, total virtual hosts that are often accessed, total requests that are often accessed, total database connection usage, innodb usage, and database query activity. In addition, the last log of apache and MySQL restart activity, disk I/O usage activity, and the last out-of-memory log will be displayed. 
 
 #
 
