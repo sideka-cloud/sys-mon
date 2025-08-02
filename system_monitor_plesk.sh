@@ -82,6 +82,31 @@ while true; do
         }
     ' | head -n 15)  # Limit to top 15 processes
 
+    # Get top 15 cumulative RAM usage for all process
+    TOP_RAM_1=$(ps -eo comm,rss | awk '{arr[$1]+=$2} END {for (i in arr) printf "%-20s %10.1f MB\n", i, arr[i]/1024}' | sort -k2 -nr | head -15)
+    # Get top 10 php ram usage
+    TOP_RAM_2=$(ps -eo pid,rss,comm | grep -E 'php|php-fpm|lsphp' | while read pid rss comm; do
+    uid=$(awk '/Uid:/ {print $2}' /proc/$pid/status 2>/dev/null)
+    user=$(getent passwd $uid | cut -d: -f1)
+    cwd=$(ls -l /proc/$pid/cwd 2>/dev/null | awk '{print $NF}')
+    rss_mb=$(echo "scale=1; $rss/1024" | bc)
+    printf "%6s %-12s %-15s %8.1f MB %-40s\n" "$pid" "$comm" "$user" "$rss_mb" "$cwd"
+    done | sort -k4 -nr | head -10)
+    
+    TOP_RAM_3=$(declare -A user_total
+    while read pid rss comm; do
+    uid=$(awk '/Uid:/ {print $2}' /proc/$pid/status 2>/dev/null)
+    user=$(getent passwd $uid | cut -d: -f1)
+    [[ -z "$user" ]] && continue
+    user_total[$user]=$(( ${user_total[$user]:-0} + rss ))
+    done < <(ps -eo pid,rss,comm | grep -E 'php|php-fpm|lsphp')
+
+    for user in "${!user_total[@]}"; do
+    rss_kb=${user_total[$user]}
+    rss_mb=$(echo "scale=1; $rss_kb/1024" | bc)
+    printf "%-15s %8.1f MB\n" "$user" "$rss_mb"
+    done | sort -k2 -nr | head -10)
+
     # Save full status output for Apache
     STATUS_LOG="/var/log/system_monitor/apache_status.log"
     apachectl fullstatus > "$STATUS_LOG"
@@ -146,11 +171,20 @@ while true; do
     echo "Network Up/Down: $NETWORK_IO KB/s" >> $OUTPUT_FILE
     echo "---------------------------------------" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 15 Processes by CPU Usage:" >> $OUTPUT_FILE
+    echo "==== Top 15 Processes by CPU Usage ====" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_CPU" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
-    echo "Top 15 Processes by RAM Usage:" >> $OUTPUT_FILE
+    echo "==== Top 15 Processes by RAM Usage ====" >> $OUTPUT_FILE
     echo "$TOP_PROCESSES_RAM" >> $OUTPUT_FILE
+    echo " " >> $OUTPUT_FILE
+    echo "==== Top 15 Cumulative RAM Usage ====" >> $OUTPUT_FILE
+    echo "$TOP_RAM_1" >> $OUTPUT_FILE
+    echo " " >> $OUTPUT_FILE
+    echo "==== Top 10 RAM Usage by PHP ====" >> $OUTPUT_FILE
+    echo "$TOP_RAM_2" >> $OUTPUT_FILE
+    echo " " >> $OUTPUT_FILE
+    echo "==== Top 10 RAM Usage by domain|user ====" >> $OUTPUT_FILE
+    echo "$TOP_RAM_3" >> $OUTPUT_FILE
     echo " " >> $OUTPUT_FILE
     echo "==== Apache Status ====" >> $OUTPUT_FILE
     echo "$APACHE_STATUS" >> $OUTPUT_FILE
