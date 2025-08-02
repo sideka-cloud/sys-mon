@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=== Install sysstat, iotop, elinks ==="
-yum install sysstat iotop elinks -y
+yum install sysstat iotop elinks bc -y
 echo " "
 check_package() {
     PACKAGE=$1
