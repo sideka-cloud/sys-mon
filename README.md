@@ -6,25 +6,28 @@ Sys-mon is a simple system monitoring to check system process activity on RHEL-b
 
 #
 
-### Pre-Requirement:
+### Pre-Requirement
 
-Compatible for CentOS/AlmaLinux with cPanel
+Operating System:
+- CentOS 7
+- AlmaLinux 8
 
-Clone Repository:
+Control Panel:
+- cPanel
+- Plesk
+
+
+#
+### Clone Repository
 
 - `git clone https://github.com/sideka-cloud/sys-mon.git && cd sys-mon`
 
 #
-### How to Install:
+### How to Install for cPanel
 
 Install system_monitor: 
 
 - `bash install.sh`
-
-
-Check logs system_monitor, example:
-
-- `bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:00"`
 
 Cek status service system_monitor:
 
@@ -33,6 +36,27 @@ Cek status service system_monitor:
 Restart service system_monitor:
 
 - `systemctl restart system_monitor`
+
+
+#
+### How to Install for Plesk
+
+Install system_monitor_plesk: 
+
+- `bash install_plesk.sh`
+
+Cek status service system_monitor:
+
+- `systemctl status system_monitor_plesk`
+
+Restart service system_monitor:
+
+- `systemctl restart system_monitor_plesk`
+
+#
+Check logs system_monitor, example:
+
+- `bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:00"`
 
 Log directory:
 
