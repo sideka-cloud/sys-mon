@@ -155,7 +155,7 @@ while true; do
     TOP_PROCESSES_IO=$(iotop -b -n 3 -o -P -k | awk '!/Total DISK READ/ && !/Actual DISK READ/ && !seen[$0]++' | awk '{print substr($0, 1, 140)}' | head -n 20) 
 
     # Get OOM status
-    OOM=$(grep "Out of memory" /var/log/messages | head -n10)
+    OOM=$(grep "Out of memory" /var/log/messages | tail -n10)
     
     # Get Total Email Queue
     QUEUE=$(exim -bpc)
