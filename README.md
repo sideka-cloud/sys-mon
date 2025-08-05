@@ -8,11 +8,12 @@ Sys-mon is a simple system monitoring to check system process activity on RHEL-b
 
 ### Pre-Requirement
 
-Operating System:
-- CentOS 7
-- AlmaLinux 8
+Operating System Compatibility:
+- CentOS 7 (full support)
+- AlmaLinux 8 (full support)
+- AlmaLinux 9 (partial support | apache function not support)
 
-Control Panel:
+Control Panel Compatibility:
 - cPanel
 - Plesk
 
