@@ -79,8 +79,10 @@ Remove service and Remove logs
 #
 ### Example logs files:
 
-![Alt text](img/1.png)
+![Alt text](img/log-1.png)
 
-![Alt text](img/2.png)
+![Alt text](img/log-2.png)
 
-![Alt text](img/3.png)
+![Alt text](img/log-3.png)
+
+![Alt text](img/log-4.png)
