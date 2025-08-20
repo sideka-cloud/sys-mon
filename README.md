@@ -55,7 +55,7 @@ Restart service system_monitor:
 - `systemctl restart system_monitor_plesk`
 
 #
-Check logs system_monitor, example:
+Check logs system_monitor, example: bash read.sh "start-yyyy-mm-dd hh:mm:ss" "end-yyyy-mm-dd hh:mm:ss"
 
 - `bash read.sh "2025-03-07 22:00:00" "2025-03-07 22:10:00"`
 
