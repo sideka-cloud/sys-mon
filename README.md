@@ -74,6 +74,7 @@ Stop and disable service
 Remove service and Remove logs
 
 - `rm -rf /etc/systemd/system/system_monitor.service`
+- `rm -rf sys-mon`
 - `rm -rf /var/log/system_monitor`
 
 #
